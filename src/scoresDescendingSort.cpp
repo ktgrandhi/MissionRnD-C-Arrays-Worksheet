@@ -14,12 +14,74 @@ NOTES:
 */
 
 #include <stdio.h>
+#include<string.h>
 
 struct student {
 	char name[10];
 	int score;
 };
+void merge(struct student *s, int start, int end, int mid);
+void mergesort(struct student *s, int start, int end)
+{
+	int mid;
+	if (start< end)
+	{
+		mid = (start + end) / 2;
+		mergesort(s, start, mid);
+		mergesort(s, mid + 1, end);
+		merge(s, start, end, mid);
+	}
+	return;
+}
+void merge(struct student *s, int start, int end, int mid)
+{
+		int i, j, k;
+		struct student c[50];
+		i = start;
+		k = start;
+		j = mid + 1;
+		while (i <= mid && j <= end)
+		{
+			if (s[i].score > s[j].score)
+			{
+				c[k].score = s[i].score;
+				strcpy(c[k].name,s[i].name);
+				k++;
+				i++;
+			}
+			else
+			{
+				c[k].score = s[j].score;
+				strcpy(c[k].name,s[j].name);
+				k++;
+				j++;
+			}
 
+		}
+		
+		while (j<=end)
+		{
+			c[k].score = s[j].score;
+			strcpy (c[k].name ,s[j].name);
+			k++;
+			j++;
+		}
+		while (i <= mid)
+		{
+			c[k].score = s[i].score;
+			strcpy(c[k].name, s[i].name);
+			k++;
+			i++;
+		}
+		for ( i = start; i < k; i++)
+		{
+			s[k].score = c[j].score;
+			strcpy(s[k].name,c[j].name);
+		}
+}
 void * scoresDescendingSort(struct student *students, int len) {
-	return NULL;
+	if (students == NULL || len < 0)
+		return NULL;
+	mergesort(students, 0, len);
+	
 }

@@ -23,7 +23,7 @@ void * sortedArrayPositionsChange(int *Arr, int len)
 		if (count == 0)
 		{
 			
-			if (index < len - 1 && Arr[index + 1] - Arr[index] < 0 )
+			if (index < len - 1 && Arr[index + 1]  <Arr[index] )
 			{
 				index1 = index;
 				count++;
@@ -33,7 +33,7 @@ void * sortedArrayPositionsChange(int *Arr, int len)
 		{
 			if (count == 1)
 			{
-				if (index<len-1 && Arr[index]<Arr[index-1] && Arr[index]<Arr[index+1])
+				if (index<len - 1 && Arr[index]<Arr[index - 1] && Arr[index]<Arr[index + 1] && Arr[index + 1]>Arr[index - 1])
 				{
 					index2 = index;
 					count++;
