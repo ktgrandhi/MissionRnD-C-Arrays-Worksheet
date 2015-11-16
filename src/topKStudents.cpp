@@ -21,6 +21,38 @@ struct student {
 	int score;
 };
 
+void swap(struct student *a, struct student *b) {
+	struct student temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void sorting(struct student *array, int len) {
+	int outerIndex, innerIndex;
+	for (int outerIndex= 0; outerIndex< len - 1; ++outerIndex) {
+		for (int innerIndex = 0; innerIndex< len - outerIndex- 1; ++innerIndex) {
+			if (array[innerIndex].score < array[innerIndex+ 1].score) {
+				swap(&array[innerIndex], &array[innerIndex + 1]);
+			}
+		}
+	}
+}
+
 struct student ** topKStudents(struct student *students, int len, int K) {
-	return NULL;
+	struct student **topKStudents;
+	int index;
+	if (students==NULL||len<0||K<1)
+		return NULL;
+	sorting(students, len);
+	topKStudents = (struct student **)malloc(K*sizeof(struct student *));
+	for (index = 0; index < K; index++)
+	{
+		topKStudents[index] = (struct student *)malloc(sizeof(struct student));
+	}
+	for ( index = 0; index < K; index++)
+	{
+		topKStudents[index] = &students[index];
+	}
+	return topKStudents;
+
 }

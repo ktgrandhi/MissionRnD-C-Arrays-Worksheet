@@ -44,7 +44,6 @@ void * removeArrayDuplicates(int *Arr, int len)
 				break;
 			}
 		}
-		// Arr = (int*)realloc(Arr, count*sizeof(int));
 		return Arr;
 	}
 	
